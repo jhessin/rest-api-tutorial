@@ -40,6 +40,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/bcrypt", "npm:5.0.0"],
             ["@types/express", "npm:4.17.12"],
             ["@types/jsonwebtoken", "npm:8.5.2"],
+            ["@types/lodash", "npm:4.14.170"],
             ["@types/mongoose", "npm:5.11.96"],
             ["@types/node", "npm:15.12.2"],
             ["@types/passport", "npm:0.4.7"],
@@ -49,6 +50,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["dotenv", "npm:10.0.0"],
             ["express", "npm:4.17.1"],
             ["jsonwebtoken", "npm:8.5.1"],
+            ["lodash", "npm:4.17.21"],
             ["mongoose", "npm:5.12.14"],
             ["nodemon", "npm:2.0.7"],
             ["passport", "npm:0.4.1"],
@@ -321,6 +323,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [
             ["@types/keyv", "npm:3.1.1"],
             ["@types/node", "npm:15.12.2"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["@types/lodash", [
+        ["npm:4.14.170", {
+          "packageLocation": "./.yarn/cache/@types-lodash-npm-4.14.170-fd6a13e651-5ecc968649.zip/node_modules/@types/lodash/",
+          "packageDependencies": [
+            ["@types/lodash", "npm:4.14.170"]
           ],
           "linkType": "HARD",
         }]
@@ -3690,6 +3701,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/bcrypt", "npm:5.0.0"],
             ["@types/express", "npm:4.17.12"],
             ["@types/jsonwebtoken", "npm:8.5.2"],
+            ["@types/lodash", "npm:4.14.170"],
             ["@types/mongoose", "npm:5.11.96"],
             ["@types/node", "npm:15.12.2"],
             ["@types/passport", "npm:0.4.7"],
@@ -3699,6 +3711,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["dotenv", "npm:10.0.0"],
             ["express", "npm:4.17.1"],
             ["jsonwebtoken", "npm:8.5.1"],
+            ["lodash", "npm:4.17.21"],
             ["mongoose", "npm:5.12.14"],
             ["nodemon", "npm:2.0.7"],
             ["passport", "npm:0.4.1"],

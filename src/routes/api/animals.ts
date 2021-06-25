@@ -1,6 +1,7 @@
 import { Router } from "express";
+import { UpdateQuery } from "mongoose";
 import { auth } from "../../config/passport";
-import { Animal, User } from "../../models";
+import { Animal, IAnimal, User } from "../../models";
 
 const router = Router();
 
@@ -42,6 +43,69 @@ router.post("/", auth, (req, res) => {
       .then(() => res.send(model))
       .catch((err) => res.status(400).send({ err }));
   });
+});
+
+router.put("/:id", auth, (req, res) => {
+  const { id } = req.params;
+  const { name, type, owner } = req.body;
+
+  if (!name || !type) {
+    return res.status(400).send({ err: "name and type are required" });
+  }
+
+  Animal.findByIdAndUpdate(
+    id,
+    {
+      name,
+      type,
+      owner,
+    },
+    { new: true }
+  )
+    .then((updatedAnimal) => {
+      return res.send(updatedAnimal);
+    })
+    .catch((err) => res.status(400).send({ err }));
+});
+
+router.patch("/:id", auth, async (req, res) => {
+  const { id } = req.params;
+  const { name, type, owner } = req.body;
+
+  // OLD METHOD
+  /*
+  if (!name || !type) {
+    return res.status(400).send({ err: "name and type are required" });
+  }
+
+  let updated: UpdateQuery<IAnimal> = owner
+    ? {
+        name,
+        type,
+        owner,
+      }
+    : {
+        name,
+        type,
+      };
+
+  Animal.findByIdAndUpdate(id, updated, { new: true })
+    .then((updatedAnimal) => {
+      return res.send(updatedAnimal);
+    })
+    .catch((err) => res.status(400).send({ err }));
+	*/
+  // NEW METHOD
+  try {
+    let animal = await Animal.findById(id);
+    if (name) animal.name = name;
+    if (type) animal.type = type;
+    if (owner) animal.owner = owner;
+    await animal.save();
+    res.send(animal);
+  } catch (err) {
+    res.status(400).send({ err });
+  }
 });
 
 export default router;

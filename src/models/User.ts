@@ -1,14 +1,16 @@
 import { Model, NativeError, ObjectId, Schema } from "mongoose";
 import bcrypt from "bcrypt";
+import _ from "lodash";
 import mongoose from "../database/mongodb";
 
-type NextFunction = (err?: NativeError, result?: any) => void;
+type NextFunction<T = any> = (err?: NativeError, result?: T) => void;
 
 export interface IUser extends Document {
   _id: ObjectId;
   username: string;
   password: string;
-  comparePassword: (password: string, next: NextFunction) => void;
+  comparePassword: (password: string, next: NextFunction<boolean>) => void;
+  removePassword: () => IUser;
   animals: ObjectId[];
 }
 
@@ -61,6 +63,10 @@ userSchema.methods.comparePassword = function (
       return next(null, isMatch);
     }
   );
+};
+
+userSchema.methods.removePassword = function () {
+  return _.omit(this.toObject(), "password");
 };
 
 export const User: Model<IUser> = mongoose.model("user", userSchema);
